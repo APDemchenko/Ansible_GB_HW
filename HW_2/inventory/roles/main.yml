@@ -1,7 +1,7 @@
 ---
 - name: Create a directory
   file:
-    path: "{{ basement_dir }}" #/tmp/ansible_temp_pb
+    path: "{{ basement_dir }}"
     state: directory
     mode: '0755'
 - name: Create file
