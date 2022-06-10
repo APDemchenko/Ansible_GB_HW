@@ -1,5 +1,5 @@
 ---
-- name: Create a directory if it does not exist
+- name: Create a directory
   file:
     path: "{{ basement_dir }}" #/tmp/ansible_temp_pb
     state: directory
@@ -8,3 +8,14 @@
   file:
     path: "{{ basement_dir }}/{{ filename }}"
     state: touch
+- name: Create User and group
+  block:
+    - name: Create group
+      group:
+        name: "{{ user.group }}"
+    - name: Create user 
+      user:
+        name: "{{ user.login }}"
+        password: "{{ user.password | password_hash('sha512') }}"
+        shell: /bin/bash
+        group: "{{ user.group }}"
